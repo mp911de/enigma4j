@@ -1,0 +1,80 @@
+{
+  "models": {
+    "A and B": {
+      "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "rotors": {
+        "I": "DMTWSILRUYQNKFEJCAZBPGXOHV",
+        "II": "HQZGPJTMOBLNCIFDYAWVEUSRXL",
+        "III": "UQNTLSZFMREHDPLKIBVYGJCWGA"
+      },
+      "notch": "default"
+    },
+    "D": {
+      "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "rotors": {
+        "ETW": "JWULCMNOHPQZYXIRADKEGVBTSF",
+        "I": "LPGSZMHAEOQKVXRFYBUTNICJDW",
+        "II": "SLVGBTFXJQOHEWIRZYAMKPCNDU",
+        "III": "CJGDPSHKTURAWZXFMYNQOBVLIE",
+        "UKW": "IMETCGFRAYSQBZXWLHKDVUPOJN"
+      },
+      "notch": "default"
+    },
+    "Enigma I": {
+      "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "defaultConfiguration": [
+        "ETW",
+        "III",
+        "II",
+        "I",
+        "UKW A"
+      ],
+      "rotors": {
+        "ETW": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "UKW A": "EJMZALYXVBWFCRQUONTSPIKHGD",
+        "UKW B": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+        "UKW C": "FVPJIAOYEDRZXWGCTKUQSBNMHL",
+        "I": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+        "II": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+        "III": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+        "IV": "ESOVPZJAYQUIRHXLNFTGKDCMWB",
+        "V": "VZBRGITYUPSDNHLXAWMJQOFECK",
+        "VI": "JPGVOUMFYQBENHZRDKASXLICTW",
+        "VII": "NZJHGRCXMYSWBOUFAIVLPEKQDT",
+        "VIII": "FKQHTLXOCBJSPDZRAMEWNIUYGV"
+      },
+      "notch": "default"
+    }
+  },
+  "notches": {
+    "default": {
+      "I": [
+        "Q"
+      ],
+      "II": [
+        "E"
+      ],
+      "III": [
+        "V"
+      ],
+      "IV": [
+        "J"
+      ],
+      "V": [
+        "Z"
+      ],
+      "VI": [
+        "Z",
+        "M"
+      ],
+      "VII": [
+        "Z",
+        "M"
+      ],
+      "VIII": [
+        "Z",
+        "M"
+      ]
+    }
+  }
+}

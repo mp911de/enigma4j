@@ -1,0 +1,89 @@
+= Enigma4J (Enigma Emulator for Java)
+
+This project contains an emulation of the https://en.wikipedia.org/wiki/Enigma_machine[Enigma machine] using Java 16. Enigma is a cipher device invented in 1918. It became later on popular during World War II.
+
+Enigma is an electric device comprised of a keyboard, 3-5 https://en.wikipedia.org/wiki/Enigma_rotor_details[rotors], an optional https://en.wikipedia.org/wiki/Enigma_machine#Plugboard[plugboard] and 26 output lights.
+Basically, it's an electric circuit with mechanically rotating wheels that change the circuit wiring between input- and output characters.
+
+The principle of Enigma is having rotors with a specific wiring between an input- and output port which compares well to an encryption key.
+Input letters are re-routed (scrambled) to an output letter.
+This happens multiple times in forward- and reverse direction.
+Additionally, when entering a key and before sending the signal through a rotor, the rotor rotates by one position which lets the machine to encrypt successive same characters to different outputs.
+Rotors can have notches at certain positions that advance the subsequent rotor (similar to a mileage counter that turns over from `9` to `0`).
+
+Finally, there were commercial and military machines.
+Military machines could have a plug board to re-route individual characters.
+It is a freely configurable routing matrix between each of the 26 letters allowing to attach 10 patches to alter character routing of 20 of the 26 letters.
+For example the patching `AT` would translate `A` to `T` and vice versa.
+Plugboard routing works for either of the entered letters and works in both directions (input, and signal output) which adds further combinations to the overall keyspace leaving the machine with https://crypto.stackexchange.com/questions/33628/how-many-possible-enigma-machine-settings[`158,962,555,217,826,360,000`] combinations.
+
+A specific behavior (later a weakness) of the machine is that a letter could never encrypt to itself which finally lead to its https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma[decryption].
+
+The Enigma machine itself has no dedicated encryption/decryption mode.
+To encrypt a message, spin up a `Enigma` instance and enter your message.
+The receiver spins up the exact same instance with the same initial settings (rotor positions, plug board) and enters the encrypted message to turn it into plain text.
+
+== Java Emulator
+
+This emulator consists of an inventory of machines, see link:src/main/resources/inventory.json[`inventory.json`] that can be loaded and instantiated for crypto use.
+
+[source,java]
+----
+var inventory = Inventory.load();
+var modelI = inventory.getModel(new Inventory.ModelIdentifier("Enigma I"));
+var enigma = modelI.createInstance();
+var rotorPositions = enigma.getRotorPositions();
+
+assertThat(enigma.process("WURSTSALAT")).isEqualTo("FXYKEONOEX");
+
+enigma.setRotorPositions(rotorPositions);
+assertThat(enigma.process("FXYKEONOEX")).isEqualTo("WURSTSALAT");
+----
+
+Individual machines can be configured before their actual usage:
+
+[source,java]
+----
+var inventory = Inventory.load();
+var modelI = inventory.getModel(new Inventory.ModelIdentifier("Enigma I"));
+
+var enigma = modelI.createInstance(c -> {
+    c.rotors((rotorConfiguration, rotorSelector) -> rotorConfiguration
+            .withRotors(rotorSelector.getRotors("II", "I", "III")).withPositions(1, 2, 3));
+});
+
+assertThat(enigma.process("WURSTSALAT")).isEqualTo("BPLKHVVVKT");
+----
+
+Finally, there's a `EnigmaWriter` for stream-processing of textual data:
+
+[source,java]
+----
+StringWriter out = new StringWriter();
+
+PrintWriter pw = new PrintWriter(new EnigmaWriter(out, instance));
+pw.print("hallowelt");
+
+assertThat(out.toString()).isEqualToIgnoringCase("alsyipmon");
+----
+
+== Building from Source
+
+The code can be easily buil with the maven wrapper.
+You also need JDK 16.
+
+[source,bash]
+----
+ $ ./mvnw clean install
+----
+
+If you want to build with the regular mvn command, you will need Maven v3.5.0 or above.
+
+== Other Emulations
+
+* https://summersidemakerspace.ca/projects/enigma-machine/[Summerside Makerspace]
+* http://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-u_v25.html[Universal Enigma]
+
+== License
+
+* https://www.apache.org/licenses/LICENSE-2.0[Apache License 2.0]
