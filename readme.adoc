@@ -8,7 +8,7 @@ Basically, it's an electric circuit with mechanically rotating wheels that chang
 The principle of Enigma is having rotors with a specific wiring between an input- and output port which compares well to an encryption key.
 Input letters are re-routed (scrambled) to an output letter.
 This happens multiple times in forward- and reverse direction.
-Additionally, when entering a key and before sending the signal through a rotor, the rotor rotates by one position which lets the machine to encrypt successive same characters to different outputs.
+Additionally, when entering a key and before sending the signal through a rotor, the rotor rotates by one position which leads the machine to encrypt successive same characters to different outputs.
 Rotors can have notches at certain positions that advance the subsequent rotor (similar to a mileage counter that turns over from `9` to `0`).
 
 Finally, there were commercial and military machines.
