@@ -69,7 +69,7 @@ assertThat(out.toString()).isEqualToIgnoringCase("alsyipmon");
 
 == Building from Source
 
-The code can be easily buil with the maven wrapper.
+The code can be easily build with the maven wrapper.
 You also need JDK 16.
 
 [source,bash]
